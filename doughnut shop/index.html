@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<title>
+		Doughnut Shop
+		</title>
+		<script>
+			function ResetForm()
+				{
+				document.getElementById("OrderForm").reset(); 
+				}
+			
+			function ValidateNumber(value)
+				{//We need to ensure that what you entered is a valid number
+				if (isNaN(value))
+					alert("What you entered is not a number. You entered a " + value +".")
+				}
+
+			function PlaceOrder()
+				{
+				const TAXRATE = 0.087;
+				
+				// Coffee blend constant prices
+				const HOUSEBLENDPRICE = 8.00;
+				const KENYAPRICE = 9.50;
+				const BOURBONPRICE = 12.00;
+				const NOBLENDPRICE = 0.00;
+				
+				// Coffee size constant prices
+				const SMALLSIZEPRICE = 0.50;
+				const MEDIUMSIZEPRICE = 0.75;
+				const LARGESIZEPRICE = 1.00;
+				const NOSIZEPRICE = 0.00;
+				
+				// Doughnut type constant prices
+				const GLAZEDDOUGHNUTPRICE = 1.00;
+				const CHOCOLATEDOUGHNUTPRICE = 1.50;
+				const MAPLEDOUGHNUTPRICE = 1.50;
+				const NOTYPEPRICE = 0.00;
+				
+				// Coffee Amount
+				var NumberOfBags = parseInt(document.getElementById("NoBagsField").value);
+				if (isNaN(NumberOfBags))
+					{// if no entry, then set it to zero in the form
+					NumberOfBags = 0;
+					document.getElementById("NoBagsField").value = 0;
+					}
+				
+				// Coffee Blend
+				var BeanChoice = document.getElementById("CoffeeBlendField");
+				var Blend = BeanChoice.options[BeanChoice.selectedIndex].value;
+				if (Blend == "HouseBlend")
+					{BeanPrice = HOUSEBLENDPRICE;}
+				if (Blend == "KenianBlend")
+					{BeanPrice = KENYAPRICE;}
+				if (Blend == "BourbonBlend")
+					{BeanPrice = BOURBONPRICE;}
+				if (Blend == "NoBlend")
+					{BeanPrice = NOBLENDPRICE;}
+				
+				// Price for Coffee Size
+				var SizeChoice = document.getElementById("SizeChoiceField");
+				var Size = SizeChoice.options[SizeChoice.selectedIndex].value;
+				if (Size == "SmallSize")
+					{SizePrice = SMALLSIZEPRICE;}
+				if (Size == "MediumSize")
+					{SizePrice = MEDIUMSIZEPRICE;}
+				if (Size == "LargeSize")
+					{SizePrice = LARGESIZEPRICE;}
+				if (Size == "NoSize")
+					{SizePrice = NOSIZEPRICE;}
+					
+				// Type of Doughnut
+				var DoughnutChoice = document.getElementById("DoughnutChoiceField");
+				var Doughnut = DoughnutChoice.options[DoughnutChoice.selectedIndex].value;
+				if (Doughnut == "Glazed")
+					{DoughnutPrice = GLAZEDDOUGHNUTPRICE;}
+				if (Doughnut == "Chocolate")
+					{DoughnutPrice = CHOCOLATEDOUGHNUTPRICE;}
+				if (Doughnut == "Maple")
+					{DoughnutPrice = MAPLEDOUGHNUTPRICE;}
+				if (Doughnut == "NoDoughnut")
+					{DoughnutPrice = NOTYPEPRICE;}
+				
+				// Doughnut Amount
+				var NumberOfDoughnuts = parseInt(document.getElementById("DoughnutAmountField").value);
+				if (isNaN(NumberOfDoughnuts))
+					{// if no entry, then set it to zero in the form
+					NumberOfDoughnuts = 0;
+					document.getElementById("DoughnutAmountField").value = 0;
+					}
+				
+				// Pricing
+				var SubTotal = (((BeanPrice+SizePrice)*NumberOfBags) + ((DoughnutPrice)*NumberOfDoughnuts));
+				var SalesTax = SubTotal * TAXRATE;
+				var Total = SubTotal + SalesTax;
+				document.getElementById("SubTotalField").value = "$" + SubTotal.toFixed(2);
+				document.getElementById("SalesTaxField").value = "$" + SalesTax.toFixed(2);
+				document.getElementById("TotalField").value = "$" + Total.toFixed(2);
+				}
+			</script>
+	</head>
+			
+				<body align="center" background="bricks.jpg">
+
+					<div class="MainBody">
+					</div>
+					
+					<div class="header">
+					<img src="https://media.wired.com/photos/6074aa620dfeac35a0cca839/16:9/w_2400,h_1350,c_limit/Science_donuts_465529983.jpg" align="left" width="300px" height="150px">
+					<h1>Doughnut Shop</h1>
+					<img src="https://media.timeout.com/images/103521615/750/422/image.jpg" align="right" class="flipimage" width="300px" height="150px">
+					</div>
+					
+					<div class="left">
+					<h1 valign="top" align="left">Shop Address:</h1>
+					<h3 valign="top" align="left">777 E. R Ave</h3>
+					<h2 valign="top" align="left">Phone:</h2>
+					<h3 valign="top" align="left">(801) 867-5309</h3>
+					<h2 valign="top" align="left">Email:</h2>
+					<h3 valign="top" align="left">info@doughnutshop.com</h3>
+
+					
+					
+					<hr>
+					<img valign="bottom" src="https://delco.today/wp-content/uploads/sites/3/2021/12/Duck-Donuts-pic-1-970x550.jpg" width="250px" height="175px">
+
+					
+					</div>
+
+
+					<div class="center">
+					<h1>Order:</h1>
+					
+					
+					
+						
+					<p><b>Customer Name:</b>
+						<input type="text" name="state" value=""><br>
+					</p>
+					<p><b>Order Date:</b>
+						<input type="date" name="date">
+					</p>
+					<hr>
+					<form id="OrderForm">
+					<p><b>Coffee Blend</b> 
+						<select id="CoffeeBlendField">
+							<option value="NoBlend" disabled selected style='display:none;'></option>
+							<option value="HouseBlend">House Blend</option>
+							<option value="KenianBlend">Kenian Blend</option>
+							<option value="BourbonBlend">Bourbon Blend</option>
+						</select>
+					</p>
+					
+					<p><b>Coffee Size:</b>
+						<select id="SizeChoiceField">
+							<option value="NoSize" disabled selected style='display:none;'></option>
+							<option value="SmallSize">Small</option>
+							<option value="MediumSize">Medium</option>
+							<option value="LargeSize">Large</option>
+							
+						</select>
+					</p>
+					
+
+					<p><b>Quantity (1-20):</b>
+						<input	type="text"
+								id="NoBagsField"
+								placeholder="#"
+								value=""
+								size = "1"
+								onblur="ValidateNumber(this.value)">
+						</p>
+								
+				
+					<hr>
+					<p><b>Doughnut Type:</b>
+						<select>
+							<option value="NoDoughnut" disabled selected style='display:none;'></option>
+							<option value="Glazed">Glazed</option>
+							<option value="Chocolate">Chocolate</option>
+							<option	value="Maple">Maple</option>
+						</select>
+					</p>
+					
+					<p><b>Quantity (1-20):</b>
+						<input	type="text"
+								id="DoughnutAmountField"
+								placeholder="#"
+								value=""
+								size = "1"
+								onblur="ValidateNumber(this.value)">
+					</p>
+					<hr>
+					<p><b>SubTotal:</b>
+						<input	type="text"
+								id="SubTotalField"
+								value="">
+					</p>
+							
+					<p><b>SalesTax:</b>
+					<input	type="text"
+							id="SalesTaxField"
+							value="">
+					</p>
+							
+					<p><b>Total Sale:</b>
+					<input	type="text"
+							id="TotalField"
+									value="">
+					</p>
+					</form>
+					<button onclick="PlaceOrder()">Calculate Totals</button>
+					<button onclick="ResetForm()">Reset</button>
+
+					</div>
+
+				</body>
+</html>
